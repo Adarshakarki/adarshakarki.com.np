@@ -67,3 +67,5 @@ This project is inspired by [Samidy](https://samidy.com/)
 * **Real apps:** Replace placeholder content with actual interactive mini-apps (calculator, notes, etc.).
 * **Search functionality:** Implement a working desktop search bar for apps and files.
 * **Improved drag/drop:** Allow multiple windows to be stacked and snapped.
+
+### Visit my [Portfolio](http://adarshakarki.com.np/)
