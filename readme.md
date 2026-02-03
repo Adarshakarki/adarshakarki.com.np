@@ -56,7 +56,7 @@ This project is inspired by [Samidy](https://samidy.com/)
 7. **Settings**
 ![Settings](assets/screenshots/settings.png)
 8. **Trash**
-![Trash](assets/screenshots/terminal.png)
+![Trash](assets/screenshots/trash.png)
 
 ### Future Improvements
 * **Interactive settings:** Make switches functional and connect to user preferences.
@@ -69,3 +69,4 @@ This project is inspired by [Samidy](https://samidy.com/)
 * **Improved drag/drop:** Allow multiple windows to be stacked and snapped.
 
 ### **Visit my [Portfolio](http://adarshakarki.com.np/)**
+
