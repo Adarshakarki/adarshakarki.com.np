@@ -1,74 +1,97 @@
 <div class="settings-app">
 
-  <!-- Fake search -->
-  <div class="search-bar">
-    <input type="text" placeholder="Search settings" disabled />
-  </div>
-
-  <!-- Apple ID -->
-  <div class="apple-id">
-    <img src="assets/icons/adarsha.png" />
-    <div>
-      <h3>Apple ID</h3>
-      <p>iCloud • Media & Purchases</p>
+  <!-- About This Mac -->
+  <div class="settings-about">
+    <img src="assets/icons/adarsha.png" class="settings-avatar" alt="Adarsha">
+    <div class="settings-about-info">
+      <h2>AdarshaOS <span>Sequoia 2.0</span></h2>
+      <div class="about-specs">
+        <div class="spec-row"><span>Name</span><strong>Adarsha Karki</strong></div>
+        <div class="spec-row"><span>Role</span><strong>IT Student · Developer</strong></div>
+        <div class="spec-row"><span>Chip</span><strong>Python / JS Hybrid Core</strong></div>
+        <div class="spec-row"><span>Memory</span><strong>Too many browser tabs</strong></div>
+        <div class="spec-row"><span>Uptime</span><strong>9 years since Hello World</strong></div>
+      </div>
     </div>
   </div>
 
-  <!-- Settings -->
-  <div class="settings-list">
+  <div class="settings-divider"></div>
 
-    <div class="setting-item">
-      <div class="left">
-        <img src="apps/settings/icons/wifi.svg" class="icon" />
-        <span>Wi-Fi</span>
-      </div>
-      <label class="switch">
-        <input type="checkbox" checked>
-        <span class="slider"></span>
-      </label>
+  <!-- Wallpaper Picker -->
+  <div class="settings-section">
+    <p class="settings-label">Wallpaper</p>
+    <div class="wallpaper-grid" id="wallpaper-grid">
+      <div class="wallpaper-thumb active" data-src="assets/wallpaper1.jpg" style="background-image:url('assets/wallpaper1.jpg')"></div>
+      <div class="wallpaper-thumb" data-src="assets/wallpaper2.jpg" style="background-image:url('assets/wallpaper2.jpg')"></div>
+      <div class="wallpaper-thumb" data-src="assets/wallpaper3.jpg" style="background-image:url('assets/wallpaper3.jpg')"></div>
+      <div class="wallpaper-thumb" data-src="assets/wallpaper4.jpg" style="background-image:url('assets/wallpaper4.jpg')"></div>
+      <div class="wallpaper-thumb" data-src="assets/wallpaper5.jpg" style="background-image:url('assets/wallpaper5.jpg')"></div>
     </div>
-
-    <div class="setting-item">
-      <div class="left">
-        <img src="apps/settings/icons/bluetooth.svg" class="icon" />
-        <span>Bluetooth</span>
-      </div>
-      <label class="switch">
-        <input type="checkbox">
-        <span class="slider"></span>
-      </label>
-    </div>
-
-    <div class="setting-item">
-      <div class="left">
-        <img src="apps/settings/icons/airplane.svg" class="icon" />
-        <span>Airplane Mode</span>
-      </div>
-      <label class="switch">
-        <input type="checkbox">
-        <span class="slider"></span>
-      </label>
-    </div>
-
-    <div class="setting-item">
-      <div class="left">
-        <img src="apps/settings/icons/bell.svg" class="icon" />
-        <span>Notifications</span>
-      </div>
-      <label class="switch">
-        <input type="checkbox" checked>
-        <span class="slider"></span>
-      </label>
   </div>
-  <div class="setting-item"   >
-      <div class="left">
-        <img src="apps/settings/icons/moon.svg" class="icon" />
-        <span>Dark Mode</span>
+
+  <div class="settings-divider"></div>
+
+  <!-- Toggles -->
+  <div class="settings-section">
+    <p class="settings-label">System</p>
+    <div class="settings-list">
+
+      <div class="setting-item">
+        <div class="left">
+          <img src="apps/settings/icons/wifi.svg" class="icon">
+          <span>Wi-Fi</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="wifiToggle">
+          <span class="slider"></span>
+        </label>
       </div>
-      <label class="switch">
-        <input type="checkbox" id="darkModeToggle">
-        <span class="slider"></span>
-      </label>
+
+      <div class="setting-item">
+        <div class="left">
+          <img src="apps/settings/icons/bluetooth.svg" class="icon">
+          <span>Bluetooth</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="bluetoothToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-item">
+        <div class="left">
+          <img src="apps/settings/icons/airplane.svg" class="icon">
+          <span>Airplane Mode</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="airplaneToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-item">
+        <div class="left">
+          <img src="apps/settings/icons/bell.svg" class="icon">
+          <span>Notifications</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="notificationsToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-item">
+        <div class="left">
+          <img src="apps/settings/icons/moon.svg" class="icon">
+          <span>Dark Mode</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="darkModeToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+
     </div>
+  </div>
+
 </div>
-<script src="apps/settings/settings.js"></script>

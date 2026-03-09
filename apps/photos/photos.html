@@ -1,3 +1,52 @@
 <div class="photos-app">
-<div id="photos-grid" class="photos-grid"></div>
+
+  <!-- Sidebar -->
+  <div class="photos-sidebar">
+    <div class="sidebar-section">
+      <p class="sidebar-heading">Library</p>
+      <div class="sidebar-item active" data-filter="all">
+        <img src="apps/photos/icons/camera.svg" class="sidebar-icon"> Photos
+      </div>
+      <div class="sidebar-item" data-filter="all">
+        <img src="apps/photos/icons/sparkles.svg" class="sidebar-icon"> Memories
+      </div>
+      <div class="sidebar-item" data-filter="all">
+        <img src="apps/photos/icons/heart.svg" class="sidebar-icon"> Favourites
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <p class="sidebar-heading">Media Types</p>
+      <div class="sidebar-item" data-filter="all">
+        <img src="apps/photos/icons/image.svg" class="sidebar-icon"> Albums
+      </div>
+      <div class="sidebar-item" data-filter="video">
+        <img src="apps/photos/icons/video.svg" class="sidebar-icon"> Videos
+      </div>
+      <div class="sidebar-item" data-filter="all">
+        <img src="apps/photos/icons/monitor.svg" class="sidebar-icon"> Screenshots
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <p class="sidebar-heading">Albums</p>
+      <div class="sidebar-item" data-filter="art">
+        <img src="apps/photos/icons/palette.svg" class="sidebar-icon"> Art
+      </div>
+      <div class="sidebar-item" data-filter="anime">
+        <img src="apps/photos/icons/star.svg" class="sidebar-icon"> Anime
+      </div>
+      <div class="sidebar-item" data-filter="misc">
+        <img src="apps/photos/icons/grid-2x2.svg" class="sidebar-icon"> Misc
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="photos-main">
+    <div class="photos-toolbar">
+      <span class="photos-title">Photos</span>
+      <span class="photos-count" id="photos-count"></span>
+    </div>
+    <div id="photos-grid" class="photos-grid"></div>
+  </div>
+
 </div>

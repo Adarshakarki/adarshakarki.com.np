@@ -1,41 +1,120 @@
-/* ----------------------------- */ 
-/*       GENERAL RESET           */
-/* ----------------------------- */
-* {
+:root {
+  /* Backgrounds */
+  --menu-bg:        rgba(255, 255, 255, 0.72);
+  --dock-bg:        rgba(255, 255, 255, 0.72);
+  --window-bg:      rgba(255, 255, 255, 0.78);
+  --titlebar-bg:    rgba(240, 240, 240, 0.9);
+
+  /* Text */
+  --text-primary:   #111111;
+  --text-secondary: #555555;
+  --title-text:     #333333;
+
+  /* Borders & Shadows */
+  --window-shadow:  0 30px 60px rgba(0, 0, 0, 0.3);
+  --dock-shadow:    0 15px 40px rgba(0, 0, 0, 0.3);
+  --border-color:   rgba(0, 0, 0, 0.08);
+
+  /* Blur */
+  --blur-amount: blur(16px);
+
+  /* Dock indicator */
+  --indicator-color: rgba(0, 0, 0, 0.5);
+
+  /* Tooltip */
+  --tooltip-bg:   rgba(30, 30, 30, 0.85);
+  --tooltip-text: #ffffff;
+
+  /* Transitions */
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] {
+  --menu-bg:        rgba(30, 30, 30, 0.82);
+  --dock-bg:        rgba(40, 40, 40, 0.82);
+  --window-bg:      rgba(35, 35, 35, 0.88);
+  --titlebar-bg:    rgba(50, 50, 50, 0.95);
+
+  --text-primary:   #f0f0f0;
+  --text-secondary: #aaaaaa;
+  --title-text:     #dddddd;
+
+  --window-shadow:  0 30px 60px rgba(0, 0, 0, 0.6);
+  --dock-shadow:    0 15px 40px rgba(0, 0, 0, 0.6);
+  --border-color:   rgba(255, 255, 255, 0.08);
+
+  --indicator-color: rgba(255, 255, 255, 0.7);
+
+  --tooltip-bg:   rgba(220, 220, 220, 0.92);
+  --tooltip-text: #111111;
+}
+
+/* GENERAL RESET */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ----------------------------- */
-/*        DESKTOP / BODY         */
-/* ----------------------------- */
+/* DESKTOP / BODY */
 body {
   height: 100vh;
   overflow: hidden;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: url("assets/wallpaper4.jpg") center/cover no-repeat;
-  cursor: url('assets/icons/cursors/default.png'), auto; /* Default arrow */
+  background: url("assets/wallpaper4.jpg") center / cover no-repeat;
+  cursor: url('assets/icons/cursors/default.png'), auto;
+  transition: background 0.4s ease;
 }
 
-/* ----------------------------- */
-/*         MENU BAR              */
-/* ----------------------------- */
+/* Desktop layer — windows live here */
+#desktop {
+  position: fixed;
+  inset: 28px 0 0 0; /* below menu bar */
+  pointer-events: none; /* clicks pass through to windows themselves */
+}
+
+#desktop .app-window {
+  pointer-events: all;
+}
+
+/* MENU BAR */
 .menu-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 12px;
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(10px);
+  background: var(--menu-bg);
+  backdrop-filter: var(--blur-amount);
+  -webkit-backdrop-filter: var(--blur-amount);
   font-size: 13px;
-  color: #000;
-  cursor: url('assets/icons/cursors/default.png'), auto;
+  color: var(--text-primary);
+  z-index: 9999;
+  transition: background 0.35s ease, color 0.35s ease;
 }
 
-.menu-left span, .menu-right span {
-  margin-left: 8px;
+.menu-left,
+.menu-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.menu-left span,
+.menu-right span {
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: url('assets/icons/cursors/pointer.png'), pointer;
+  transition: background 0.15s ease;
+}
+
+.menu-left span:hover,
+.menu-right span:hover {
+  background: rgba(128, 128, 128, 0.2);
 }
 
 .menu-left img.apple,
@@ -43,136 +122,338 @@ body {
   width: 16px;
   height: 16px;
   vertical-align: middle;
-  cursor: url('assets/icons/cursors/pointer.png'), pointer;
 }
 
-/* ----------------------------- */
-/*            DOCK               */
-/* ----------------------------- */
+/* DOCK */
 .dock {
   position: fixed;
   bottom: 18px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 20px;
-  padding: 14px 28px;
-  border-radius: 28px;
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-  cursor: url('assets/icons/cursors/default.png'), auto;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 22px;
+  background: var(--dock-bg);
+  backdrop-filter: var(--blur-amount);
+  -webkit-backdrop-filter: var(--blur-amount);
+  box-shadow: var(--dock-shadow);
+  border: 1px solid var(--border-color);
+  z-index: 9998;
+  transition: background 0.35s ease;
 }
 
-.dock img {
-  width: 44px;
-  transition: transform 0.25s ease;
+/* Each dock item: tooltip + icon + indicator stacked */
+.dock-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
   cursor: url('assets/icons/cursors/pointer.png'), pointer;
 }
 
-.dock img:hover {
-  transform: scale(1.6);
+.dock-item img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+  will-change: transform;
 }
 
-/* ----------------------------- */
-/*         APP WINDOW            */
-/* ----------------------------- */
-#app-window {
-  transform: scale(0.8);
-  opacity: 0;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+/* Tooltip above icon */
+.dock-tooltip {
   position: absolute;
-  top: 120px;
-  left: 120px;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--tooltip-bg);
+  color: var(--tooltip-text);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  transform: translateX(-50%) translateY(4px);
+}
+
+.dock-item:hover .dock-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Running indicator dot */
+.dock-indicator {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--indicator-color);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.dock-item.running .dock-indicator {
+  opacity: 1;
+}
+
+/* Divider before Trash */
+.dock-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--border-color);
+  margin: 0 4px;
+  align-self: center;
+}
+
+/* APP WINDOW */
+.app-window {
+  position: absolute;
   min-width: 480px;
   width: fit-content;
-  max-width: 600px;
+  max-width: min(680px, calc(100vw - 40px));
   min-height: 220px;
   height: fit-content;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.75);
-  backdrop-filter: blur(15px);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
-  display: none;
-  overflow: hidden; /* no scrollbars */
-  cursor: url('assets/icons/cursors/pointer.png'), pointer;
+  max-height: calc(100vh - 134px);
+  border-radius: 14px;
+  background: var(--window-bg);
+  backdrop-filter: var(--blur-amount);
+  -webkit-backdrop-filter: var(--blur-amount);
+  box-shadow: var(--window-shadow);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: windowOpen 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: box-shadow 0.2s ease, opacity 0.3s ease;
 }
 
-#app-window.open {
-  transform: scale(1);
-  opacity: 1;
-  display: block;
+/* Apps with sidebar layouts need explicit height to fill window */
+.app-window[data-app="photos"],
+.app-window[data-app="notes"],
+.app-window[data-app="finder"],
+.app-window[data-app="settings"] {
+  height: calc(100vh - 134px);
+  width: 680px;
 }
 
-/* ----------------------------- */
-/*          TITLE BAR            */
-/* ----------------------------- */
-#app-window .title-bar {
+.app-window[data-app="calculator"] {
+  height: fit-content;
+  width: fit-content;
+  min-width: unset;
+  max-width: unset;
+}
+
+.app-window[data-app="calculator"].maximized {
+  max-width: calc(100vw - 8px) !important;
+}
+
+@keyframes windowOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Focused window gets stronger shadow */
+.app-window.focused {
+  box-shadow: 0 36px 70px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="dark"] .app-window.focused {
+  box-shadow: 0 36px 70px rgba(0, 0, 0, 0.75);
+}
+
+/* Minimized — hidden but keeps state */
+.app-window.minimized {
+  opacity: 0;
+  transform: scale(0.5) translateY(80px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Maximized */
+.app-window.maximized {
+  top: 4px !important;
+  left: 4px !important;
+  width: calc(100vw - 8px) !important;
+  max-width: calc(100vw - 8px) !important;
+  height: calc(100vh - 110px) !important; /* leaves room for dock */
+  border-radius: 14px;
+  transition: var(--transition-smooth);
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+  /* Menu bar — only Apple + time */
+  .menu-left span:not(:first-child) { display: none; }
+  .menu-right span:not(#date):not(#time) { display: none; }
+  #date { display: none; } /* too cramped, just show time */
+
+  .dock {
+    gap: 4px;
+    padding: 6px 10px;
+    bottom: 8px;
+    border-radius: 18px;
+  }
+
+  .dock-item img { width: 32px; height: 32px; }
+  .dock-divider  { display: none; }
+
+  .app-window {
+    min-width: unset;
+    width: calc(100vw - 16px) !important;
+    max-width: calc(100vw - 16px) !important;
+    left: 8px !important;
+    top: 36px !important;
+    height: calc(100vh - 120px) !important;
+    max-height: calc(100vh - 120px) !important;
+    border-radius: 12px;
+  }
+
+  .app-window.maximized {
+    top: 4px !important;
+    left: 4px !important;
+    width: calc(100vw - 8px) !important;
+    max-width: calc(100vw - 8px) !important;
+  }
+}
+
+/* TITLE BAR */
+.app-window .title-bar {
   display: flex;
   align-items: center;
-  padding: 10px;
-  cursor: url('assets/icons/cursors/move.png'), move; /* Drag cursor */
+  padding: 10px 12px;
+  background: var(--titlebar-bg);
+  border-bottom: 1px solid var(--border-color);
+  cursor: url('assets/icons/cursors/move.png'), move;
   user-select: none;
+  flex-shrink: 0;
+  transition: background 0.35s ease;
 }
 
-#app-window .controls {
+.app-window .controls {
   display: flex;
   gap: 8px;
 }
 
-#app-window .btn {
+.app-window .btn {
   width: 12px;
   height: 12px;
   border-radius: 50%;
   display: inline-block;
   cursor: url('assets/icons/cursors/pointer.png'), pointer;
+  transition: filter 0.15s ease;
 }
 
-#app-window .btn.close { background: #ff5f56; }
-#app-window .btn.min   { background: #ffbd2e; }
-#app-window .btn.max   { background: #27c93f; }
+.app-window .btn:hover {
+  filter: brightness(0.85);
+}
 
-#app-window .title {
+.app-window .btn.close { background: #ff5f56; }
+.app-window .btn.min   { background: #ffbd2e; }
+.app-window .btn.max   { background: #27c93f; }
+
+.app-window .title {
   margin-left: 12px;
   font-size: 13px;
-  color: #333;
+  font-weight: 500;
+  color: var(--title-text);
   cursor: url('assets/icons/cursors/default.png'), auto;
+  flex: 1;
+  text-align: center;
+  margin-right: 44px; /* optical center — offsets the controls width */
 }
 
-/* ----------------------------- */
-/*       CLICK RIPPLE EFFECT     */
-/* ----------------------------- */
+/* WINDOW CONTENT */
+.app-window .content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  color: var(--text-primary);
+  transition: color 0.35s ease;
+  cursor: url('assets/icons/cursors/text.png'), text;
+  min-height: 0; /* critical — lets flex child scroll instead of growing */
+}
+
+/* Calculator — centered, dark bg fills window */
+.app-window[data-app="calculator"] .content {
+  display: flex;
+background: var(--calc-bg);
+  padding: 0;
+}
+
+/* Trash — centered */
+.app-window[data-app="trash"] .content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* These apps manage their own colors and layout entirely */
+.app-window[data-app="terminal"] .content *,
+.app-window[data-app="photos"] .content *,
+.app-window[data-app="notes"] .content *,
+.app-window[data-app="calculator"] .content *,
+.app-window[data-app="settings"] .content * {
+  color: unset;
+}
+
+/* Generic text color for simple apps */
+.app-window .content p,
+.app-window .content span,
+.app-window .content h1,
+.app-window .content h2,
+.app-window .content h3 {
+  color: var(--text-primary);
+  transition: color 0.35s ease;
+}
+
+.app-window .content a {
+  cursor: url('assets/icons/cursors/pointer.png'), pointer;
+  color: #0071e3;
+}
+
+[data-theme="dark"] .app-window .content a { color: #4ca8ff; }
+
+.app-window .content img { cursor: url('assets/icons/cursors/default.png'), auto; }
+
+/* Scrollbar */
+.app-window .content::-webkit-scrollbar { width: 6px; }
+.app-window .content::-webkit-scrollbar-track { background: transparent; }
+.app-window .content::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.35); border-radius: 3px; }
+.app-window .content::-webkit-scrollbar-thumb:hover { background: rgba(128,128,128,0.6); }
+
+/* CLICK RIPPLE EFFECT */
 .click-effect {
-  position: absolute;
+  position: fixed;
   width: 12px;
   height: 12px;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.25);
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%) scale(0);
-  animation: clickAnim 0.5s ease-out forwards;
-  z-index: 9999;
+  animation: clickAnim 0.45s ease-out forwards;
+  z-index: 99999;
 }
 
 @keyframes clickAnim {
-  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
-  50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.5; }
-  100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+  0%   { transform: translate(-50%, -50%) scale(0);   opacity: 1; }
+  50%  { transform: translate(-50%, -50%) scale(1.5); opacity: 0.5; }
+  100% { transform: translate(-50%, -50%) scale(1);   opacity: 0; }
 }
 
-/* ----------------------------- */
-/*       APP CONTENT CURSORS     */
-/* ----------------------------- */
-#app-window .content,
-#app-window .content p,
-#app-window .content a {
-  cursor: url('assets/icons/cursors/text.png'), text;
-}
-
-#app-window .content img {
-  cursor: url('assets/icons/cursors/default.png'), auto;
-}
-
-#app-window .content a {
-  cursor: url('assets/icons/cursors/pointer.png'), pointer;
+/* REDUCED MOTION SUPPORT */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

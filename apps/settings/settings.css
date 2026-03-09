@@ -1,109 +1,149 @@
 .settings-app {
-  height: 100%;
-  padding: 16px;
-  background: #f5f5f7;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  cursor: url('../../assets/icons/cursors/default.png'), default;
-}
-
-/* Search */
-.search-bar input {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: none;
-  background: #e5e5ea;
-  outline: none;
-cursor: url('../../assets/icons/cursors/text.png'), pointer;
-}
-
-/* Apple ID */
-.apple-id {
   display: flex;
+  flex-direction: column;
+  /* Removed global gap to control spacing manually */
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* About This Mac */
+.settings-about {
+  display: flex;
+  gap: 16px;
   align-items: center;
-  gap: 12px;
-  background: white;
-  padding: 14px;
-  border-radius: 12px;
-  margin: 16px 0;
+  margin-bottom: 20px; /* Controlled spacing here */
 }
-
-.apple-id img {
-  width: 44px;
-  height: 44px;
+.settings-avatar {
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
-/* List */
-.settings-list {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
+.settings-about-info h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
 }
+
+.settings-about-info h2 span {
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.about-specs { display: flex; flex-direction: column; gap: 4px; }
+
+.spec-row {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  align-items: center;
+}
+
+.spec-row span {
+  color: var(--text-secondary);
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.spec-row strong { color: var(--text-primary); }
+
+/* Divider */
+/* Tighter Divider */
+.settings-divider { 
+  height: 1px; 
+  background: var(--border-color); 
+  margin: 10px 0 20px 0; /* (Top, Right, Bottom, Left) */
+  width: 100%;
+}
+
+/* Section label */
+.settings-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+/* Wallpaper grid */
+.wallpaper-grid {
+  display: flex;
+  gap: 10px;
+}
+
+.wallpaper-thumb {
+  width: 80px;
+  height: 50px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.15s, transform 0.15s;
+}
+
+.wallpaper-thumb:hover { transform: scale(1.05); }
+.wallpaper-thumb.active { border-color: #0071e3; }
+
+/* Toggles */
+.settings-list { display: flex; flex-direction: column; gap: 2px; }
 
 .setting-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px;
-  border-bottom: 1px solid #eee;
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.setting-item:last-child {
-  border-bottom: none;
-}
+.setting-item:last-child { border-bottom: none; }
 
-.left {
+.setting-item .left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-primary);
 }
 
-.icon {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
+.setting-item .icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
 }
 
-/* iOS-style switch */
-.switch {
-  position: relative;
-  width: 46px;
-  height: 26px;
-cursor: url('../../assets/icons/cursors/pointer.png'), pointer;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+/* Toggle switch */
+.switch { position: relative; display: inline-block; width: 36px; height: 20px; cursor: url('../../assets/icons/cursors/pointer.png'), pointer; }
+.switch input { opacity: 0; width: 0; height: 0; }
 
 .slider {
   position: absolute;
   inset: 0;
-  background: #ccc;
+  background: rgba(120,120,128,0.3);
   border-radius: 20px;
-  transition: background 0.3s ease;
-  
+  transition: background 0.2s;
+  cursor: url('../../assets/icons/cursors/pointer.png'), pointer;
 }
 
 .slider::before {
-  content: "";
+  content: '';
   position: absolute;
-  height: 22px;
-  width: 22px;
+  width: 16px;
+  height: 16px;
   left: 2px;
   top: 2px;
   background: white;
   border-radius: 50%;
-  transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
-.switch input:checked + .slider {
-  background: #34c759;
-}
-
-.switch input:checked + .slider::before {
-  transform: translateX(20px);
-}
+.switch input:checked + .slider { background: #34c759; }
+.switch input:checked + .slider::before { transform: translateX(16px); }

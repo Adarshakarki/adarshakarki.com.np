@@ -1,74 +1,112 @@
-/* ----------------------------- */
-/*       FINDER SYSTEM INFO      */
-/* ----------------------------- */
-.content .finder-system-info {
-  display: flex;
-  gap: 24px;
-  width: 100%;
-  padding: 20px;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 14px;
-  cursor: url('../../cursors/text.png'), text;
-  overflow: hidden; /* no scrollbars */
-}
-
-/* Left profile image */
-.content .finder-system-info .profile-pic {
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.content .finder-system-info .profile-pic img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 4px solid rgba(255,255,255,0.8);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  object-fit: cover;
-  cursor: url('../../cursors/default.png'), auto;
-}
-
-/* Right info panel */
-.content .finder-system-info .info {
-  flex-grow: 1;
+.finder-app {
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 6px;
+  gap: 14px;
+  overflow-y: auto;
+  height: 100%;
+  width: 100%;
 }
 
-.content .finder-system-info .info h2 {
-  font-size: 20px;
-  color: #333;
-  cursor: url('../../cursors/default.png'), auto;
-}
-
-.content .finder-system-info .info p {
-  color: #555;
-  cursor: url('../../cursors/text.png'), text;
-}
-
-/* Social links */
-.content .finder-system-info .info .socials {
+.finder-profile {
   display: flex;
-  gap: 12px;
-  cursor: url('../../cursors/pointer.png'), pointer;
+  gap: 14px;
+  align-items: flex-start;
+  flex-shrink: 0;
 }
 
-.content .finder-system-info .info .socials a {
-  color: #007aff;
+.finder-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.finder-info { display: flex; flex-direction: column; gap: 4px; }
+
+.finder-info h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.finder-role {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.finder-bio {
+  font-size: 12px;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.finder-socials { display: flex; gap: 8px; margin-top: 2px; }
+
+.finder-socials a {
+  font-size: 11px;
+  font-weight: 500;
   text-decoration: none;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(0,113,227,0.12);
+  color: #0071e3;
+  transition: background 0.15s;
 }
 
-.content .finder-system-info .info .socials a:hover {
-  text-decoration: underline;
+.finder-socials a:hover { background: rgba(0,113,227,0.22); }
+
+[data-theme="dark"] .finder-socials a {
+  background: rgba(76,168,255,0.15);
+  color: #4ca8ff;
 }
 
-/* Optional: small separator line */
-.content .finder-system-info .info hr {
-  border: none;
-  border-top: 1px solid rgba(0,0,0,0.1);
-  margin: 8px 0;
+.finder-divider { height: 1px; background: var(--border-color); flex-shrink: 0; }
+
+.finder-section { display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
+
+.finder-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
+
+/* Timeline */
+.timeline { display: flex; flex-direction: column; gap: 12px; padding-left: 4px; }
+
+.timeline-item { display: flex; gap: 10px; align-items: flex-start; }
+
+.timeline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0071e3;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .timeline-dot { background: #4ca8ff; }
+
+.timeline-content { display: flex; flex-direction: column; gap: 1px; }
+
+.timeline-year { font-size: 10px; color: var(--text-secondary); }
+.timeline-content strong { font-size: 12px; color: var(--text-primary); }
+.timeline-content p { font-size: 11px; color: var(--text-secondary); }
+
+/* Fun Facts */
+.facts-grid { display: flex; flex-direction: column; gap: 6px; }
+
+.fact-item {
+  font-size: 12px;
+  color: var(--text-primary);
+  padding: 7px 10px;
+  background: rgba(0,0,0,0.04);
+  border-radius: 8px;
+  line-height: 1.4;
+}
+
+[data-theme="dark"] .fact-item { background: rgba(255,255,255,0.05); }

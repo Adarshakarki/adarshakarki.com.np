@@ -1,17 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Adarsha Karki — IT Student & Developer Portfolio">
+  <meta property="og:title" content="Adarsha Karki | Portfolio">
+  <meta property="og:description" content="IT Student & Developer — macOS-style portfolio">
+  <meta property="og:type" content="website">
   <title>Adarsha</title>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/adarsha.png">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="fun.css">
 </head>
 <body>
 
-  <!-- MENU BAR -->
+<!-- MENU BAR -->
   <div class="menu-bar">
     <div class="menu-left">
-      <span><img src="assets/icons/apple.png" alt="apple" class="apple"></span>
+      <span><img src="assets/icons/apple.png" alt="Apple" class="apple"></span>
       <span>Finder</span>
       <span>File</span>
       <span>Edit</span>
@@ -21,37 +27,82 @@
       <span>Help</span>
     </div>
     <div class="menu-right">
-      <span><img src="assets/icons/battery.png" size="32x32" alt="Battery icon" class="battery"></span>
+      <span><img src="assets/icons/battery.png" alt="Battery" class="battery"></span>
       <span id="date">Thu Jan 15</span>
       <span id="time">12:00</span>
     </div>
   </div>
-
-  <!-- APP WINDOW -->
-  <div id="app-window">
-    <div class="title-bar">
-      <div class="controls">
-        <span class="btn close"></span>
-        <span class="btn min"></span>
-        <span class="btn max"></span>
-      </div>
-      <span class="title">App</span>
-    </div>
-    <div class="content"></div>
-  </div>
-
+  <!-- DESKTOP AREA -->
+  <div id="desktop"></div>
   <!-- DOCK -->
   <div class="dock">
-    <img src="assets/icons/window-icons/finder.png" data-app="finder" data-name="Finder" alt="Finder">
-    <img src="assets/icons/window-icons/folder.png" data-app="folder" data-name="Folder" alt="Folder">
-    <img src="assets/icons/window-icons/launchpad.png" data-app="launchpad" data-name="Launchpad" alt="Launchpad">
-    <img src="assets/icons/window-icons/terminal.png" data-app="terminal" data-name="Terminal" alt="Terminal">
-    <img src="assets/icons/window-icons/photos.png" data-app="photos" data-name="Photos" alt="Photos">
-    <img src="assets/icons/window-icons/settings.png" data-app="settings" data-name="Settings" alt="Settings">
-    <img src="assets/icons/window-icons/trash.png" data-app="trash" data-name="Trash" alt="Trash">
-  </div>
+    <div class="dock-item" data-app="finder" data-name="Finder">
+      <div class="dock-tooltip">Finder</div>
+      <img src="assets/icons/window-icons/finder.png" alt="Finder">
+      <div class="dock-indicator"></div>
+    </div>
 
-  <!-- SCRIPT -->
-  <script src="script.js"></script>
-</body>
+    <div class="dock-item" data-app="folder" data-name="Folder">
+      <div class="dock-tooltip">Folder</div>
+      <img src="assets/icons/window-icons/folder.png" alt="Folder">
+      <div class="dock-indicator"></div>
+    </div>
+
+    <div class="dock-item" data-app="launchpad" data-name="Launchpad">
+      <div class="dock-tooltip">Launchpad</div>
+      <img src="assets/icons/window-icons/launchpad.png" alt="Launchpad">
+      <div class="dock-indicator"></div>
+    </div>
+
+    <div class="dock-item" data-app="terminal" data-name="Terminal">
+      <div class="dock-tooltip">Terminal</div>
+      <img src="assets/icons/window-icons/terminal.png" alt="Terminal">
+      <div class="dock-indicator"></div>
+    </div>
+
+    <div class="dock-item" data-app="photos" data-name="Photos">
+      <div class="dock-tooltip">Photos</div>
+      <img src="assets/icons/window-icons/photos.png" alt="Photos">
+      <div class="dock-indicator"></div>
+    </div>
+
+    <div class="dock-item" data-app="settings" data-name="Settings">
+      <div class="dock-tooltip">Settings</div>
+      <img src="assets/icons/window-icons/settings.png" alt="Settings">
+      <div class="dock-indicator"></div>
+    </div>
+
+    <div class="dock-item" data-app="notes" data-name="Notes">
+      <div class="dock-tooltip">Notes</div>
+      <img src="assets/icons/window-icons/notes.png" alt="Notes">
+      <div class="dock-indicator"></div>
+    </div>
+
+    <div class="dock-item" data-app="calculator" data-name="Calculator">
+      <div class="dock-tooltip">Calculator</div>
+      <img src="assets/icons/window-icons/calculator.png" alt="Calculator">
+      <div class="dock-indicator"></div>
+    </div>
+    <!-- Divider before Trash -->
+    <div class="dock-divider"></div>
+
+    <div class="dock-item" data-app="trash" data-name="Trash">
+      <div class="dock-tooltip">Trash</div>
+      <img src="assets/icons/window-icons/trash.png" alt="Trash">
+      <div class="dock-indicator"></div>
+    </div>
+
+  </div>
+  <div id="spotlight">
+  <div class="spotlight-box">
+    <input id="spotlight-input" type="text" placeholder="Spotlight Search" autocomplete="off">
+    <div id="spotlight-results"></div>
+  </div>
+</div>
+ <!-- Scripts -->
+<script src="js/boot.js"></script>
+<script src="js/app.js"></script>
+<script src="js/windowManager.js"></script>
+<script src="js/dock.js"></script>
+<script src="js/fun.js"></script>
 </html>

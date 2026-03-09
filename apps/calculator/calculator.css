@@ -1,0 +1,163 @@
+.calc-app {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: #1c1c1e;
+  border-radius: 0 0 14px 14px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  user-select: none;
+}
+
+/* Scientific panel */
+.calc-scientific {
+  display: none;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 6px 14px 14px;
+  gap: 6px;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  flex: 1;
+  min-width: 0;
+}
+
+.app-window.maximized .calc-scientific { display: flex; flex: 3; }
+
+.calc-sci-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Mini: circle. Fullscreen: pill */
+.btn-sci {
+  background: #2c2c2e;
+  color: rgba(255,255,255,0.8);
+  border: none;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 400;
+  cursor: not-allowed;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  overflow: hidden;
+  aspect-ratio: 1;
+  width: 100%;
+}
+
+.app-window.maximized .btn-sci {
+  aspect-ratio: unset;
+  border-radius: 14px;
+  height: 100%;
+  padding: 10px 4px;
+}
+
+.btn-sci sup, .btn-sci sub { font-size: 0.55em; color: unset; }
+
+/* Standard panel */
+.calc-standard {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 280px;
+}
+
+/* Fullscreen: standard panel also stretches */
+.app-window.maximized .calc-standard {
+  flex: 2;
+  width: unset;
+  min-width: unset;
+  max-width: unset;
+}
+
+.calc-display {
+  padding: 16px 16px 8px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.calc-expression {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  min-height: 18px;
+  margin-bottom: 2px;
+}
+
+.calc-result {
+  font-size: 48px;
+  font-weight: 200;
+  color: #fff;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: -1px;
+}
+
+/* Mini button grid */
+.calc-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 8px 10px 14px;
+  flex: 1;
+  align-content: end;
+}
+
+.btn-calc {
+  background: #333335;
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  font-weight: 300;
+  cursor: pointer;
+  font-family: inherit;
+  transition: filter 0.1s;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+/* Fullscreen: pill buttons */
+.app-window.maximized .btn-calc {
+  aspect-ratio: unset;
+  border-radius: 14px;
+  height: 100%;
+  font-size: clamp(18px, 2vw, 28px);
+}
+
+.app-window.maximized .calc-buttons {
+  align-content: stretch;
+  gap: 10px;
+  padding: 10px 14px 16px;
+}
+
+.app-window.maximized .calc-buttons > .btn-calc {
+  height: auto;
+}
+
+.btn-calc:hover  { filter: brightness(1.3); }
+.btn-calc:active { filter: brightness(0.7); }
+.btn-calc.gray   { background: #636366; color: #000; font-weight: 500; }
+.btn-calc.orange { background: #ff9f0a; color: #fff; }
+
+.btn-calc.wide {
+  grid-column: span 2;
+  border-radius: 999px;
+  aspect-ratio: unset;
+  justify-content: flex-start;
+  padding-left: 22px;
+}
+
+.app-window.maximized .btn-calc.wide {
+  border-radius: 14px;
+  justify-content: flex-start;
+  padding-left: 28px;
+}
