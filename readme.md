@@ -33,7 +33,7 @@ Inspired by [Samidy](https://samidy.com/)
 ## Apps
 
 ### Homepage
-![Homepage](assets/screenshots/Homepage.png)
+![Homepage](assets/screenshots/homepage.png)
 
 ### 1. Finder (About Me)
 Personal info in a macOS Finder style with three sections — profile with social links, education timeline, and fun facts.
@@ -52,7 +52,7 @@ Full-screen grid of deployed games. Click to open live demo.
 
 Games: Impossible Tic Tac Toe · Tic Tac Toe · Tetris · Flappy Bird · Classic Snake
 
-![Launchpad](assets/screenshots/Launchpad.png)
+![Launchpad](assets/screenshots/launchpad.png)
 
 ### 4. Terminal (Tech Stack)
 Neofetch-style terminal with Apple braille ASCII art, system info panel, and colour-coded command output.
@@ -92,7 +92,7 @@ A custom endless runner built into the portfolio. Features a pixel-art character
 ### 10. Music Player
 Full-screen library view (sidebar playlist + album art) and a persistent mini player (floating, bottom-left). ID3 tag metadata and album art loaded automatically from local files.
 
-![Music Player](assets/screenshots/music.png)
+![Music Player](assets/screenshots/Music.png)
 
 ### 11. Trash
 It's empty. Like his brain.
@@ -100,5 +100,6 @@ It's empty. Like his brain.
 ![Trash](assets/screenshots/trash.png)
 
 ---
+
 
 ## Visit my [Portfolio](http://adarshakarki.com.np/)
