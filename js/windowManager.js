@@ -30,7 +30,6 @@ function centerWindow(win) {
     const maxW   = window.innerWidth  - 16;
     const maxH   = window.innerHeight - menuH - dockH - 16;
 
-    // Cap window size before centering
     if (win.offsetWidth  > maxW) win.style.width  = maxW + 'px';
     if (win.offsetHeight > maxH) win.style.height = maxH + 'px';
 
@@ -94,8 +93,8 @@ function bindControls(win, appFolder) {
     const maxLeft = window.innerWidth  - win.offsetWidth;
     const maxTop  = window.innerHeight - win.offsetHeight - dockH;
 
-    win.style.left = `${Math.max(0,       Math.min(maxLeft, e.clientX - ox))}px`;
-    win.style.top  = `${Math.max(menuH,   Math.min(maxTop,  e.clientY - oy))}px`;
+    win.style.left = `${Math.max(0,     Math.min(maxLeft, e.clientX - ox))}px`;
+    win.style.top  = `${Math.max(menuH, Math.min(maxTop,  e.clientY - oy))}px`;
   });
 
   document.addEventListener('mouseup', () => dragging = false);
@@ -107,6 +106,14 @@ const NO_JS_APPS = ['finder', 'trash', 'terminal', 'launchpad', 'folder'];
 function openAppWindow(url, appName) {
   const appFolder = url.split('/')[1];
 
+  // Single instance — if already open, focus it (unminimize if needed)
+  const existing = document.querySelector(`.app-window[data-app="${appFolder}"]`);
+  if (existing) {
+    existing.classList.remove('minimized');
+    focusWindow(existing);
+    return;
+  }
+
   if (!document.getElementById(`css-${appFolder}`)) {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
@@ -114,27 +121,28 @@ function openAppWindow(url, appName) {
     link.id = `css-${appFolder}`;
     document.head.appendChild(link);
   }
-fetch(url)
-  .then(r => r.text())
-  .then(html => {
-    const win = createWindow(appName, html, appFolder);
-    updateIndicator(appFolder, true);
 
-    // Sync settings UI now that the HTML is in the DOM
-    if (appFolder === 'settings') syncSettingsUI();
+  fetch(url)
+    .then(r => r.text())
+    .then(html => {
+      const win = createWindow(appName, html, appFolder);
+      updateIndicator(appFolder, true);
 
-    if (NO_JS_APPS.includes(appFolder)) return;
+      // Sync settings UI now that the HTML is in the DOM
+      if (appFolder === 'settings') syncSettingsUI();
 
-    if (!document.getElementById(`js-${appFolder}`)) {
-      const script = document.createElement('script');
-      script.src = `apps/${appFolder}/${appFolder}.js`;
-      script.id  = `js-${appFolder}`;
-      script.onload = () => callInit(appFolder, win);
-      document.body.appendChild(script);
-    } else {
-      callInit(appFolder, win);
-    }
-  });
+      if (NO_JS_APPS.includes(appFolder)) return;
+
+      if (!document.getElementById(`js-${appFolder}`)) {
+        const script = document.createElement('script');
+        script.src = `apps/${appFolder}/${appFolder}.js`;
+        script.id  = `js-${appFolder}`;
+        script.onload = () => callInit(appFolder, win);
+        document.body.appendChild(script);
+      } else {
+        callInit(appFolder, win);
+      }
+    });
 }
 
 function callInit(appFolder, win) {

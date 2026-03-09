@@ -69,8 +69,8 @@ body {
 /* Desktop layer — windows live here */
 #desktop {
   position: fixed;
-  inset: 28px 0 0 0; /* below menu bar */
-  pointer-events: none; /* clicks pass through to windows themselves */
+  inset: 28px 0 0 0;
+  pointer-events: none;
 }
 
 #desktop .app-window {
@@ -144,7 +144,6 @@ body {
   transition: background 0.35s ease;
 }
 
-/* Each dock item: tooltip + icon + indicator stacked */
 .dock-item {
   position: relative;
   display: flex;
@@ -162,7 +161,6 @@ body {
   will-change: transform;
 }
 
-/* Tooltip above icon */
 .dock-tooltip {
   position: absolute;
   bottom: calc(100% + 10px);
@@ -186,7 +184,6 @@ body {
   transform: translateX(-50%) translateY(0);
 }
 
-/* Running indicator dot */
 .dock-indicator {
   width: 4px;
   height: 4px;
@@ -200,7 +197,6 @@ body {
   opacity: 1;
 }
 
-/* Divider before Trash */
 .dock-divider {
   width: 1px;
   height: 40px;
@@ -231,7 +227,7 @@ body {
   transition: box-shadow 0.2s ease, opacity 0.3s ease;
 }
 
-/* Apps with sidebar layouts need explicit height to fill window */
+/* Apps with sidebar layouts — fill height */
 .app-window[data-app="photos"],
 .app-window[data-app="notes"],
 .app-window[data-app="finder"],
@@ -240,6 +236,7 @@ body {
   width: 680px;
 }
 
+/* Calculator — wraps tightly around buttons */
 .app-window[data-app="calculator"] {
   height: fit-content;
   width: fit-content;
@@ -251,18 +248,34 @@ body {
   max-width: calc(100vw - 8px) !important;
 }
 
-@keyframes windowOpen {
-  from {
-    opacity: 0;
-    transform: scale(0.88);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+/* Music — sidebar + main panel */
+.app-window[data-app="music"] {
+  width: 620px;
+  height: 420px;
+  min-width: unset;
 }
 
-/* Focused window gets stronger shadow */
+.app-window[data-app="music"] .content {
+  padding: 0;
+  overflow: hidden;
+}
+.app-window[data-app="game"] {
+  width: 700px;
+  height: 360px;
+  min-width: unset;
+}
+
+.app-window[data-app="game"] .content {
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer !important;
+}
+
+@keyframes windowOpen {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+
 .app-window.focused {
   box-shadow: 0 36px 70px rgba(0, 0, 0, 0.45);
 }
@@ -271,7 +284,6 @@ body {
   box-shadow: 0 36px 70px rgba(0, 0, 0, 0.75);
 }
 
-/* Minimized — hidden but keeps state */
 .app-window.minimized {
   opacity: 0;
   transform: scale(0.5) translateY(80px);
@@ -279,23 +291,21 @@ body {
   transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Maximized */
 .app-window.maximized {
   top: 4px !important;
   left: 4px !important;
   width: calc(100vw - 8px) !important;
   max-width: calc(100vw - 8px) !important;
-  height: calc(100vh - 110px) !important; /* leaves room for dock */
+  height: calc(100vh - 110px) !important;
   border-radius: 14px;
   transition: var(--transition-smooth);
 }
 
-/* Mobile layout */
+/* Mobile */
 @media (max-width: 600px) {
-  /* Menu bar — only Apple + time */
   .menu-left span:not(:first-child) { display: none; }
   .menu-right span:not(#date):not(#time) { display: none; }
-  #date { display: none; } /* too cramped, just show time */
+  #date { display: none; }
 
   .dock {
     gap: 4px;
@@ -353,10 +363,7 @@ body {
   transition: filter 0.15s ease;
 }
 
-.app-window .btn:hover {
-  filter: brightness(0.85);
-}
-
+.app-window .btn:hover { filter: brightness(0.85); }
 .app-window .btn.close { background: #ff5f56; }
 .app-window .btn.min   { background: #ffbd2e; }
 .app-window .btn.max   { background: #27c93f; }
@@ -369,7 +376,7 @@ body {
   cursor: url('assets/icons/cursors/default.png'), auto;
   flex: 1;
   text-align: center;
-  margin-right: 44px; /* optical center — offsets the controls width */
+  margin-right: 44px;
 }
 
 /* WINDOW CONTENT */
@@ -380,13 +387,13 @@ body {
   color: var(--text-primary);
   transition: color 0.35s ease;
   cursor: url('assets/icons/cursors/text.png'), text;
-  min-height: 0; /* critical — lets flex child scroll instead of growing */
+  min-height: 0;
 }
 
-/* Calculator — centered, dark bg fills window */
+/* Calculator content */
 .app-window[data-app="calculator"] .content {
   display: flex;
-background: var(--calc-bg);
+  background: #1c1c1e;
   padding: 0;
 }
 
@@ -397,13 +404,34 @@ background: var(--calc-bg);
   justify-content: center;
 }
 
-/* These apps manage their own colors and layout entirely */
-.app-window[data-app="terminal"] .content *,
+/* Apps that manage their own colors */
 .app-window[data-app="photos"] .content *,
 .app-window[data-app="notes"] .content *,
-.app-window[data-app="calculator"] .content *,
 .app-window[data-app="settings"] .content * {
   color: unset;
+}
+
+/* Terminal — always dark, force Catppuccin white */
+.app-window[data-app="terminal"] .content,
+.app-window[data-app="terminal"] .content * {
+  color: #cdd6f4 !important;
+}
+
+/* Calculator — always dark, force white */
+.app-window[data-app="calculator"] .content,
+.app-window[data-app="calculator"] .content * {
+  color: #ffffff !important;
+}
+
+/* Restore calculator button-specific colors */
+.app-window[data-app="calculator"] .btn-calc.gray,
+.app-window[data-app="calculator"] .btn-calc.gray * {
+  color: #000000 !important;
+}
+
+.app-window[data-app="calculator"] .btn-calc.orange,
+.app-window[data-app="calculator"] .btn-calc.orange * {
+  color: #ffffff !important;
 }
 
 /* Generic text color for simple apps */
@@ -431,7 +459,7 @@ background: var(--calc-bg);
 .app-window .content::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.35); border-radius: 3px; }
 .app-window .content::-webkit-scrollbar-thumb:hover { background: rgba(128,128,128,0.6); }
 
-/* CLICK RIPPLE EFFECT */
+/* CLICK RIPPLE */
 .click-effect {
   position: fixed;
   width: 12px;
@@ -450,7 +478,6 @@ background: var(--calc-bg);
   100% { transform: translate(-50%, -50%) scale(1);   opacity: 0; }
 }
 
-/* REDUCED MOTION SUPPORT */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

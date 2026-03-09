@@ -1,0 +1,9 @@
+const SONG_FILES = [
+  'Frank Ocean - Nights.m4a',
+  'Future - Low Life (feat. The Weeknd).m4a',
+  'Ken Carson - ss.m4a',
+  'Playboi Carti - POP OUT.m4a',
+  'The Weeknd - Is There Someone Else.m4a',
+  'Travis Scott - FE!N (feat. Playboi Carti).m4a',
+  'Yeat - COMË N GO.m4a',
+];

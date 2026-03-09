@@ -82,7 +82,19 @@ Standard mode (circular buttons) and scientific mode (pill buttons, fullscreen o
 
 ![Calculator](assets/screenshots/calculator.png)
 
-### 9. Trash
+### 9. Game
+A custom endless runner built into the portfolio. Features a pixel-art character (that looks suspiciously like the owner), parallax mountain backgrounds, Catppuccin dark theme, and four obstacle types — spikes, walls, and hanging pipes that force you to crouch. Double jump to clear tall walls. Night mode kicks in at 500m. High score saved locally.
+
+**Controls:** `Space` / `↑` to jump, double-tap to double jump, `↓` / `S` to crouch.
+
+![AdarshRun](assets/screenshots/game.png)
+
+### 10. Music Player
+Full-screen library view (sidebar playlist + album art) and a persistent mini player (floating, bottom-left). ID3 tag metadata and album art loaded automatically from local files.
+
+![Music Player](assets/screenshots/music.png)
+
+### 11. Trash
 It's empty. Like his brain.
 
 ![Trash](assets/screenshots/trash.png)
