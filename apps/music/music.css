@@ -1,3 +1,4 @@
+/* Full window app */
 .music-app {
   display: flex;
   width: 100%;
@@ -33,6 +34,7 @@
   overflow-y: auto;
   flex: 1;
   padding: 4px 8px 12px;
+  margin: 0;
 }
 
 .music-playlist li {
@@ -45,7 +47,7 @@
   transition: background 0.15s;
 }
 
-.music-playlist li:hover { background: rgba(255,255,255,0.05); }
+.music-playlist li:hover  { background: rgba(255,255,255,0.05); }
 .music-playlist li.active { background: rgba(243,139,168,0.15); }
 
 .music-playlist li img {
@@ -70,7 +72,7 @@
   color: #6c7086;
 }
 
-.music-playlist-info { min-width: 0; }
+.music-playlist-info  { min-width: 0; }
 
 .music-playlist-name {
   font-size: 12px;
@@ -133,9 +135,7 @@
   background: linear-gradient(135deg, #313244, #1e1e2e);
 }
 
-.music-info-full {
-  text-align: center;
-}
+.music-info-full { text-align: center; }
 
 .music-title-full {
   font-size: 17px;
@@ -188,7 +188,7 @@
 
 .music-seek::-webkit-slider-thumb:hover { transform: scale(1.3); }
 
-/* Controls */
+/* Full controls */
 .music-controls-full {
   display: flex;
   align-items: center;
@@ -211,7 +211,7 @@
   height: 40px;
 }
 
-.music-btn:hover { background: rgba(255,255,255,0.08); transform: scale(1.1); }
+.music-btn:hover  { background: rgba(255,255,255,0.08); transform: scale(1.1); }
 .music-btn:active { transform: scale(0.92); }
 
 .music-btn-play {
@@ -223,23 +223,23 @@
   border-radius: 50%;
 }
 
-.music-btn-play:hover { background: #f5a3b5; }
+.music-btn-play:hover { background: #f5a3b5; transform: scale(1.05); }
 
 /* Mini player */
 #music-mini {
   position: fixed;
   bottom: 100px;
   left: 16px;
-  width: 260px;
+  width: 280px;
   background: rgba(24,24,37,0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 16px;
-  padding: 10px 12px;
+  padding: 10px 10px 13px 12px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   z-index: 9990;
   box-shadow: 0 8px 32px rgba(0,0,0,0.4);
   transition: opacity 0.2s, transform 0.2s;
@@ -252,13 +252,17 @@
   transform: translateY(8px);
 }
 
+/* Art */
+#mini-art-wrap {
+  flex-shrink: 0;
+}
+
 .mini-art {
   width: 40px;
   height: 40px;
   border-radius: 8px;
   object-fit: cover;
-  background: #313244;
-  flex-shrink: 0;
+  display: block;
   cursor: pointer;
 }
 
@@ -272,10 +276,10 @@
   justify-content: center;
   font-size: 18px;
   color: #6c7086;
-  flex-shrink: 0;
   cursor: pointer;
 }
 
+/* Info */
 .mini-info {
   flex: 1;
   min-width: 0;
@@ -299,47 +303,81 @@
   text-overflow: ellipsis;
 }
 
+/* Controls */
 .mini-controls {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 1px;
+  flex-shrink: 0;
 }
 
 .mini-btn {
   background: none;
   border: none;
   color: #cdd6f4;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
-  padding: 5px;
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+  padding: 0;
 }
 
 .mini-btn:hover { background: rgba(255,255,255,0.1); }
 
 .mini-btn-close {
-  font-size: 11px;
+  font-size: 10px;
   color: #6c7086;
   margin-left: 2px;
 }
 
-.mini-btn-close:hover { 
-color: #f38ba8; 
-background: rgba(243,139,168,0.1);}
+.mini-btn-close:hover { color: #f38ba8; background: rgba(243,139,168,0.12); }
 
+/* Icons — force pure white regardless of SVG color */
+.music-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  filter: brightness(0) invert(1);
+  pointer-events: none;
+}
+
+.music-btn-play .music-icon {
+  filter: brightness(0); /* dark icon on pink button */
+}
+
+.mini-icon {
+  width: 15px;
+  height: 15px;
+  display: block;
+  filter: brightness(0) invert(1);
+  pointer-events: none;
+}
+
+.mini-btn-close .mini-icon {
+  width: 12px;
+  height: 12px;
+  opacity: 0.5;
+}
+
+.mini-btn-close:hover .mini-icon {
+  opacity: 1;
+  filter: brightness(0) saturate(100%) invert(63%) sepia(60%) saturate(500%) hue-rotate(300deg); /* pink */
+}
+
+/* Progress bar — sits at the very bottom */
 .mini-seek {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 3px;
-  background: #45475a;
+  background: rgba(69,71,90,0.6);
   border-radius: 0 0 16px 16px;
   overflow: hidden;
 }
@@ -347,7 +385,6 @@ background: rgba(243,139,168,0.1);}
 .mini-seek-fill {
   height: 100%;
   background: #f38ba8;
-  border-radius: 0 0 16px 16px;
   transition: width 0.5s linear;
   width: 0%;
 }

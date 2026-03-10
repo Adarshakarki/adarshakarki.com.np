@@ -122,10 +122,10 @@ function buildMiniPlayer() {
       <div class="mini-artist" id="mini-artist"></div>
     </div>
     <div class="mini-controls">
-      <button class="mini-btn" id="mini-prev">⏮</button>
-      <button class="mini-btn" id="mini-play">▶</button>
-      <button class="mini-btn" id="mini-next">⏭</button>
-      <button class="mini-btn mini-btn-close" id="mini-close">✕</button>
+      <button class="mini-btn" id="mini-prev"><img src="apps/music/icons/skip-back.svg" class="mini-icon" alt="prev"></button>
+      <button class="mini-btn" id="mini-play"><img src="apps/music/icons/play.svg" class="mini-icon" alt="play" id="mini-play-icon"></button>
+      <button class="mini-btn" id="mini-next"><img src="apps/music/icons/skip-forward.svg" class="mini-icon" alt="next"></button>
+      <button class="mini-btn mini-btn-close" id="mini-close"><img src="apps/music/icons/x.svg" class="mini-icon" alt="close"></button>
     </div>
     <div class="mini-seek"><div class="mini-seek-fill" id="mini-seek-fill"></div></div>
   `;
@@ -145,7 +145,9 @@ function buildMiniPlayer() {
     const m    = mp.currentMeta();
     mini.querySelector('#mini-title').textContent  = m.title;
     mini.querySelector('#mini-artist').textContent = m.artist;
-    mini.querySelector('#mini-play').textContent   = mp.playing ? '⏸' : '▶';
+    mini.querySelector('#mini-play-icon').src = mp.playing
+      ? 'apps/music/icons/pause.svg'
+      : 'apps/music/icons/play.svg';
 
     const wrap = mini.querySelector('#mini-art-wrap');
     if (m.artUrl) {
@@ -212,7 +214,9 @@ function initMusic(winEl) {
     const m = mp.currentMeta();
     titleEl.textContent  = m.title;
     artistEl.textContent = m.artist;
-    playBtn.textContent  = mp.playing ? '⏸' : '▶';
+    winEl.querySelector('#music-play-icon').src = mp.playing
+      ? 'apps/music/icons/pause.svg'
+      : 'apps/music/icons/play.svg';
 
     // Album art
     if (m.artUrl) {
